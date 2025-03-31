@@ -16,3 +16,37 @@
 
 
 <img width="729" alt="Screenshot 2025-03-31 at 11 33 47 AM" src="https://github.com/user-attachments/assets/07f619be-9760-46fe-b074-30e430c53584" />
+
+
+## Repo Structure
+
+```
+ml-driven-student-engagement/
+│
+├── data/                          # Raw and processed datasets
+│   ├── raw/                       # Raw, unprocessed data (e.g., CSV files)
+│   └── scripts/                   # Scripts to preprocess data
+│
+├── src/                           # Core application logic (API, containerization, etc.)
+│   ├── app/                       # Flask or FastAPI web app for handling requests
+│   ├── Dockerfile                 # Dockerfile to build app container
+│   |── requirements.txt           # App dependencies for Docker
+│   ├── configs/                   # Kubernetes configuration files
+│   │   ├── deployment.yaml       # Kubernetes deployment configuration
+│   │   └── service.yaml          # Kubernetes service configuration
+│   └── utils/                     # Utility functions for data loading, processing
+│
+├── tests/                         # Unit tests and integration tests
+│   ├── test_app.py                # Tests for the web app
+│   ├── test_model.py              # Tests for ML models
+│   └── test_integration.py        # Tests for overall system integration
+│
+├── .github/                       # GitHub Actions (CI/CD)
+│   ├── workflows/                 # CI/CD workflow configuration
+│   │   └── ci-cd.yml              # GitHub Actions workflow file
+│
+├── .gitignore                     # To exclude unnecessary files/folders from version control
+├── README.md                      # Project overview, instructions
+└── requirements.txt               # Dependencies for development
+
+```
