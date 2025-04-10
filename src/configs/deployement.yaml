@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: backend
-          image: us-docker.pkg.dev/vcc-assignment-452510/student-engagement-app/backend:latest
+          image: us-central1-docker.pkg.dev/vcc-assignment-452510/student-engagement-app/backend:latest
           ports:
             - containerPort: 5000
