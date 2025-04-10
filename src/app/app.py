@@ -1,7 +1,5 @@
 from flask import Flask, request, jsonify
-from src.app.model import get_sentiment
-import os
-import json
+from src.app.model import categorize_student
 
 app = Flask(__name__)
 
@@ -13,25 +11,19 @@ def home():
 def predict():
     try:
         data = request.get_json()
+        required_fields = ['performance', 'attendance', 'engagement']
+        
+        if not all(field in data for field in required_fields):
+            return jsonify({'error': 'Missing required fields'}), 400
 
-        # Expected data format
-        feedback_text = data['feedback_text']
-
-        # Sentiment prediction from the model
-        sentiment = get_sentiment(feedback_text)
+        category = categorize_student(data)
 
         return jsonify({
             'status': 'success',
-            'feedback_text': feedback_text,
-            'sentiment': sentiment
+            'category': category
         })
-
     except Exception as e:
-        return jsonify({
-            'status': 'error',
-            'message': str(e)
-        }), 400
-
+        return jsonify({'status': 'error', 'message': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

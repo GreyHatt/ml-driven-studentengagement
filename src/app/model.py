@@ -1,9 +1,12 @@
-from transformers import pipeline
-import torch
+import joblib
+import numpy as np
+import os
 
-# Initialize the Hugging Face sentiment-analysis pipeline
-def get_sentiment(feedback_text: str):
-    model = pipeline("sentiment-analysis", model="distilbert-base-uncased", tokenizer="distilbert-base-uncased")
-    result = model(feedback_text)
-    sentiment = result[0]['label']
-    return sentiment
+# Load model once when app starts
+model_path = os.path.join(os.path.dirname(__file__), 'model.joblib')
+model = joblib.load(model_path)
+
+def categorize_student(data):
+    features = np.array([[data['performance'], data['attendance'], data['engagement']]])
+    prediction = model.predict(features)[0]
+    return prediction

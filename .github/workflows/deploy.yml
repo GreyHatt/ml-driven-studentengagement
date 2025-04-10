@@ -30,17 +30,16 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -f infra/Dockerfile -t us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/benchmarking-deployment-assesment/benchmarking:latest .
+          docker build -f src/Dockerfile -t us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/student-engagement-app/backend:latest .
 
       - name: Push Docker Image to Artifact Registry
         run: |
-          docker push us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/benchmarking-deployment-assesment/benchmarking:latest
-      
+          docker push us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/student-engagement-app/backend:latest
+
       - name: Retrieve cluster credentials
         run: |
           gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone us-central1-c
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f src/kubernetes/deployment.yaml
-          kubectl apply -f src/kubernetes/service.yaml
+          kubectl apply -f src/configs/
