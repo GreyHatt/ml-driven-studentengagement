@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-engagement-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: student-engagement-api
+  template:
+    metadata:
+      labels:
+        app: student-engagement-api
+    spec:
+      containers:
+        - name: student-engagement-api
+          image: gcr.io/your-project-id/student-engagement-api:latest
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: student-engagement-api-service
+spec:
+  selector:
+    app: student-engagement-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: LoadBalancer
