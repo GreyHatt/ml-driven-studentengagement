@@ -42,4 +42,5 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
+          gcloud components install gke-gcloud-auth-plugin
           kubectl apply -f src/configs/
