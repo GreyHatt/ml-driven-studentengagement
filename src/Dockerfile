@@ -11,7 +11,7 @@ COPY src/app/ .
 
 RUN ls
 
-COPY src/data/ .
+COPY src/data/ ./data
 
 RUN ls
 
