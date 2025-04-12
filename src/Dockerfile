@@ -10,4 +10,4 @@ COPY src/app/ /app/
 # Expose port 5000 for the Flask application
 EXPOSE 5000
 
-CMD ["python", "app/app.py"]
+CMD ["python", "app.py"]
