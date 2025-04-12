@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from src.app.model import categorize_student
+from model import categorize_student
 from data.prepare_data import data as default_data
 
 app = Flask(__name__)
