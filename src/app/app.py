@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from src.app.model import categorize_student
+from data.prepare_data import data as default_data
 
 app = Flask(__name__)
 
@@ -11,16 +12,21 @@ def home():
 def predict():
     try:
         data = request.get_json()
-        required_fields = ['performance', 'attendance', 'engagement']
+        students = data if data else default_data
+        if isinstance(students, dict):
+            students = [students]
         
-        if not all(field in data for field in required_fields):
-            return jsonify({'error': 'Missing required fields'}), 400
-
-        category = categorize_student(data)
+        predictions = []
+        for student in students:
+            category = categorize_student(student)
+            predictions.append({
+                "student_id": student.get("student_id", "unknown"),
+                "category": category
+            })
 
         return jsonify({
             'status': 'success',
-            'category': category
+            'category': predictions
         })
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500

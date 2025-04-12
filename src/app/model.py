@@ -8,13 +8,11 @@ HEADERS = {
     "Authorization": f"Bearer {HUGGINGFACE_API_TOKEN}"
 }
 
-def format_input(data):
-    # Convert structured data into descriptive text
-    structured_text = (
-        f"The student scored {data['marks']} marks, had {data['attendance']*100}% attendance, "
-        f"completed {data['assignments_completion']*100}% assignments, and showed responsiveness score of "
-        f"{data['responsiveness']*100}%. Feedback: {data['student_feedback']}"
-    )
+def format_input(data): 
+    structured_text = ( 
+        f"Student {data['student_id']} scored {data['marks']} marks, had {data['attendance']*100}% attendance, " 
+        f"completed {data['assignments_completion']*100}% assignments, and had a responsiveness score of " 
+        f"{data['responsiveness']*100}%. Feedback: {data['student_feedback']}" ) 
     return structured_text
 
 def categorize_student(data):
