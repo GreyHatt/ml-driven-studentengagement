@@ -41,6 +41,10 @@ jobs:
           gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone us-central1-c
 
       - name: Deploy to Kubernetes
+        env:
+          HF_API_TOKEN : ${{ secrets.HF_API_TOKEN }}
         run: |
           gcloud components install gke-gcloud-auth-plugin
+          echo "export HF_API_TOKEN=${HF_API_TOKEN}" >> $GITHUB_ENV
           kubectl apply -f src/configs/
+          

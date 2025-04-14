@@ -2,8 +2,7 @@ import os
 import requests
 
 HUGGINGFACE_API_URL = "https://api-inference.huggingface.co/models/distilbert-base-uncased"
-HUGGINGFACE_API_TOKEN = os.getenv("HF_API_TOKEN")  # Store in GitHub Secrets or GCP Secret Manager
-
+HUGGINGFACE_API_TOKEN = os.environ.get("HF_API_TOKEN")
 HEADERS = {
     "Authorization": f"Bearer {HUGGINGFACE_API_TOKEN}"
 }
