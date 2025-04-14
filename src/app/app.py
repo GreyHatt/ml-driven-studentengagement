@@ -12,10 +12,16 @@ def home():
 def predict():
     try:
         data = request.get_json()
-        students = data if data else default_data
-        if isinstance(students, dict):
-            students = [students]
-        
+        default_student_data = {
+            "student_id": "12345",
+            "marks": 85,
+            "attendance": 90,
+            "assignments": 95,
+            "responsiveness": 80,
+            "feedback": 4.5
+        }
+        students = data if data else [default_student_data]
+
         predictions = []
         for student in students:
             category = categorize_student(student)
