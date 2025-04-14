@@ -52,7 +52,7 @@ src/
      ```
     Note: You need to create Hugging Face API Token through https://huggingface.co/settings/tokens
 
-3. Before next step, install GCP CLI, create GCP Artifact Register and create GKE Cluster
+3. Before next step, install GCP CLI, create GCP Artifact Register with name `student-engagement-app` and create GKE Cluster
 
 4. Run the script:
     ```bash
