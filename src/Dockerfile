@@ -14,8 +14,8 @@ RUN ls
 COPY src/data/ ./data
 
 RUN ls
-
-
+ARG HF_API_TOKEN
+ENV HF_API_TOKEN=$HF_API_TOKEN
 # Expose port 5000 for the Flask application
 EXPOSE 5000
 

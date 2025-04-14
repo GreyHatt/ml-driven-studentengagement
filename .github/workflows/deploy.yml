@@ -30,7 +30,8 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -f src/Dockerfile -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/student-engagement-app/backend:latest .
+          docker build --build-arg HF_API_TOKEN=${{ secrets.HF_API_TOKEN }} \
+          -f src/Dockerfile -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/student-engagement-app/backend:latest .
 
       - name: Push Docker Image to Artifact Registry
         run: |
@@ -41,6 +42,10 @@ jobs:
           gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone us-central1-c
 
       - name: Deploy to Kubernetes
+        env:
+          HF_API_TOKEN : ${{ secrets.HF_API_TOKEN }}
         run: |
           gcloud components install gke-gcloud-auth-plugin
+          echo "export HF_API_TOKEN=${HF_API_TOKEN}" >> $GITHUB_ENV
           kubectl apply -f src/configs/
+          
