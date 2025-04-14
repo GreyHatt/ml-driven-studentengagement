@@ -30,7 +30,8 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -f src/Dockerfile -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/student-engagement-app/backend:latest .
+          docker build --build-arg HF_API_TOKEN=${{ secrets.HF_API_TOKEN }} \
+          -f src/Dockerfile -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/student-engagement-app/backend:latest .
 
       - name: Push Docker Image to Artifact Registry
         run: |
