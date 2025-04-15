@@ -96,3 +96,7 @@ Description: Accepts student data in JSON format and returns categorized results
     "status": "success"
 }
 ```
+
+## Architecture Diagram
+
+<img width="927" alt="Screenshot 2025-04-15 at 5 59 57 PM" src="https://github.com/user-attachments/assets/851f9538-4c54-4bea-84da-7383d24e780b" />
